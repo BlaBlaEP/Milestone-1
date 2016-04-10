@@ -8,13 +8,21 @@ float rotx = 0, roty = 0;
 void setup() {
 }
 void draw() {
-  background(255,255,255);
+  background(255);
 My3DPoint eye = new My3DPoint(-100, -100, -5000);
 My3DPoint origin = new My3DPoint(0, 0, 0); //The first vertex of your cuboid
 My3DBox input3DBox = new My3DBox(origin, 100,150,300);
 
+textSize(20);
+text("Press(hold) right or left to rotate around Y axis", 300, 100);
+text("Press(hold) up or down to rotate around X axis", 300, 150);
+text("Click and drag to increase(decrease) size", 300, 200);
+fill(0, 102, 153);
+
 float[][] transformScale = scaleMatrix(scale, scale, scale);
 
+
+//Can hold button instead of clicking
 if(keyPressed == true){
     if(keyCode == UP){
       rotx += Math.PI/24;
