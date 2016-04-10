@@ -77,7 +77,6 @@ void checkCylinderCollision(ArrayList<PVector> positions){
       PVector v = normalized.mult(2 * PVector.dot(velocity, normalized));
       velocity = PVector.sub(velocity, v);
       velocity.x *= -0.6;
-      velocity.y *= -0.6;
     }
     
   }
