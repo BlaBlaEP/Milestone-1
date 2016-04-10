@@ -16,7 +16,7 @@ int shift = 0;
 PVector Cposition;
 ArrayList<PVector> positions = new ArrayList<PVector>();
 
-float speed = 0.1;
+float speed = 0.2;
 
 float rotZ = 0;
 float rotX = 0;
@@ -83,10 +83,9 @@ void draw() {
     
     noStroke();
     mover.update();
-    mover.display();
     mover.checkEdges();
     mover.checkCylinderCollision(positions);
-    
+    mover.display();
     //update cylinder not on ball location
     
     popMatrix();
@@ -150,10 +149,8 @@ void displayBall() {
 
 void mouseClicked(){
   if(shift == 1){
-    float x = mouseX - ((width / 2) - 300);
-    float y = mouseY - ((height/ 2 + 100) - 300);
-    x += -300;
-    y += -300;
+    float x = mouseX - ((width / 2));
+    float y = mouseY - ((height/ 2 + 100));
     
     //check Borders
     float cyRadius = cylinder.getBaseSize();

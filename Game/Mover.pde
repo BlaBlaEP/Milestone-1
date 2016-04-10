@@ -1,4 +1,4 @@
-public final static int BALL_RADIUS = 10;
+public final static int BALL_RADIUS = 20;
 
 class Mover {
 PVector location;
@@ -29,7 +29,7 @@ translate(location.x, location.y, location.z);
 }
 
 void display() {
-sphere(2 * BALL_RADIUS);
+sphere(BALL_RADIUS);
 }
 
 //velocity * -1?? cf physics how to stop ball at boundaries
@@ -63,22 +63,21 @@ velocity.z = velocity.z * - 0.6;
 void checkCylinderCollision(ArrayList<PVector> positions){
   Cylinder cylinder = new Cylinder();
   //float cyRad = cylinder.getBaseSize();
-  PVector contact;
   PVector normal;
   PVector normalized;
   for(PVector p: positions){
     float dist = PVector.dist(new PVector(p.x, 0, p.y), location);
-    contact = new PVector(location.x - p.x, 0, location.y - p.y);
     
-    /*if(dist < BALL_RADIUS +  cylinder.getBaseSize() && velocity.mag() > 0){
-      location = contact.get();
-    }*/
     
     if(dist <= BALL_RADIUS +  cylinder.getBaseSize()){
-      normal = new PVector(location.x - p.x, 0, location.y - p.y);
+      normal = new PVector(location.x - p.x, 0, location.z - p.y);
       normalized = normal.normalize();
+      location.x = p.x + normalized.x * (BALL_RADIUS +  cylinder.getBaseSize());
+      location.z = p.y + normalized.z * (BALL_RADIUS +  cylinder.getBaseSize());
       PVector v = normalized.mult(2 * PVector.dot(velocity, normalized));
-      velocity = PVector.sub(velocity, v).mult(-0.6);
+      velocity = PVector.sub(velocity, v);
+      velocity.x *= -0.6;
+      velocity.y *= -0.6;
     }
     
   }
